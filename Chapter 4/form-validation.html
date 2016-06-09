@@ -1,0 +1,39 @@
+<html ng-app="notesApp">
+<head><title>Notes App</title></head>
+<body ng-controller="MainCtrl as ctrl">
+<form ng-submit="ctrl.submit()" name="myForm">
+<input type="text"
+ng-model="ctrl.user.username"
+required
+ng-minlength="4">
+<input type="password"
+ng-model="ctrl.user.password"
+required>
+<input type="submit"
+value="Submit"
+ng-disabled="myForm.$invalid">
+</form>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+</script>
+<script type="text/javascript">
+angular.module('notesApp', [])
+.controller('MainCtrl', [function() {
+var self = this;
+self.submit = function() {
+console.log('User clicked submit with ', self.user);
+};
+}]);
+</script>
+</body>
+</html>
+<!--1. We give the form a name, which we can refer to later. In this case, it is myForm.
+2. We leverage HTML5 validation tags and add the required attribute on each input
+field.
+3. We add a validator, ng-minlength, which enforces that the minimum length of the
+value in the input field for the username is four characters.
+4. On the Submit button, we add an ng-disabled directive. This disables the element
+if the condition is true.
+5. For the disable condition, we leverage the form, which exposes a controller with
+the current state of the form. In this case, we tell the button to disable itself if the
+form with the name myForm is $invalid.-->
